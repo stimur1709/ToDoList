@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>Добавить дело</h1>
-<form th:method="POST" th:action="@{/save}" th:object="${createTask}">
+<form th:method="POST" th:action="@{/task/save}" th:object="${createTask}">
     <p>Дело: <label>
         <input type="text" th:field="*{name}"/>
     </label></p>
