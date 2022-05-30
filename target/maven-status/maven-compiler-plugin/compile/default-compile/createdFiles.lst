@@ -1,5 +1,0 @@
-main\service\TaskService.class
-main\entity\TaskEntity.class
-main\repository\TaskRepository.class
-controllers\TaskController.class
-main\Main.class
