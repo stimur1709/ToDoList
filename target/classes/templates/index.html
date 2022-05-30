@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ToDoList</title>
+</head>
+<body>
+<h1>Список дел</h1>
+<table>
+    <tr>
+        <th>Дело</th>
+        <th>Время добавления</th>
+    </tr>
+    <tr th:each="taskEntity : ${tasks}">
+        <td th:text="${taskEntity.name}">...</td>
+        <td th:text="${taskEntity.date}">...</td>
+    </tr>
+</table>
+<a th:href="@{/task/add}">Добавить дело</a>
+</body>
+</html>

@@ -1,26 +1,21 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>ToDoList</title>
+    <meta charset="UTF-8">
+    <title>ToDoList</title>
 </head>
 <body>
-<h2>Добавить дело</h2>
-<form action="#" th:action="@{/task}"
-      th:object="${task}" method="post">
-  <p>Дело: <input type="text" th:field="*{name}" /></p>
-  <p><input type="submit" value="Добавить" /></p>
-</form>
 <h1>Список дел</h1>
-<table border="1">
-  <tr>
-    <th>Дело</th>
-    <th>Время добавления</th>
-  </tr>
-  <tr th:each ="task : ${tasks}">
-    <td th:utext="${task.name}">...</td>
-    <td th:utext="${task.date}">...</td>
-  </tr>
+<table>
+    <tr>
+        <th>Дело</th>
+        <th>Время добавления</th>
+    </tr>
+    <tr th:each="taskEntity : ${tasks}">
+        <td th:text="${taskEntity.name}">...</td>
+        <td th:text="${taskEntity.date}">...</td>
+    </tr>
 </table>
+<a th:href="@{/task/add}">Добавить дело</a>
 </body>
 </html>
