@@ -7,10 +7,7 @@ import main.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/main")
@@ -43,21 +40,23 @@ public class MainController {
     }
 
 
-    @GetMapping("/task")
-    public String getTasksPage(Model model) {
-        model.addAttribute("tasks", taskService.getAllTask());
+    @GetMapping("/task/{id}")
+    public String getTasksPage(@PathVariable("id") Integer id, Model model) {
+        model.addAttribute("tasks", taskService.getAllTask(id));
+        model.addAttribute("user", userService.getUserId(id));
         return "tasks";
     }
 
-    @GetMapping("/task/add")
-    public String createTask(Model model) {
+    @GetMapping("/task/{id}/add")
+    public String createTask(@PathVariable("id") Integer id, Model model) {
         model.addAttribute("createTask", new TaskEntity());
+        model.addAttribute("user", userService.getUserId(id));
         return "task";
     }
 
-    @PostMapping("/task/save")
-    public String createTask(@ModelAttribute("createTask") TaskEntity taskEntity) {
-        taskService.createTask(taskEntity);
-        return "redirect:/main/task";
+    @PostMapping("/task/{id}/save")
+    public String createTask(@PathVariable("id") Integer id, @ModelAttribute("createTask") TaskEntity taskEntity) {
+        taskService.createTask(taskEntity, userService.getUserId(id));
+        return "redirect:/main/task/" + taskEntity.getUser().getId();
     }
 }

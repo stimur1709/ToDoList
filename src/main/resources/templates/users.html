@@ -15,7 +15,7 @@
     <tr th:each="user : ${users}">
         <td th:text="${user.firstName}">...</td>
         <td th:text="${user.lastName}">...</td>
-        <td><a th:href="'/main/task'">Перейти к списку дел</a></td>
+        <td><a th:href="'/main/task/' + ${user.getId()}">Перейти к списку дел</a></td>
     </tr>
 </table>
 <a th:href="@{/main/user/add}">Добавить пользователя</a>

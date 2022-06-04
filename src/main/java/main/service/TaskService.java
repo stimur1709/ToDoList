@@ -1,6 +1,7 @@
 package main.service;
 
 import main.entity.TaskEntity;
+import main.entity.UserEntity;
 import main.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,15 +21,16 @@ public class TaskService {
         this.taskRepository = taskRepository;
     }
 
-    public List<TaskEntity> getAllTask() {
-        return taskRepository.findAll();
+    public List<TaskEntity> getAllTask(Integer id) {
+        return taskRepository.getTasksListByUserId(id);
     }
 
-    public void createTask(TaskEntity taskEntity) {
+    public void createTask(TaskEntity taskEntity, UserEntity user) {
         Date date = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         try {
             taskEntity.setDate(formatter.parse(formatter.format(date)));
+            taskEntity.setUser(user);
         } catch (ParseException e) {
             e.printStackTrace();
         }
